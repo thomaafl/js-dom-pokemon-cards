@@ -12,6 +12,8 @@ function renderCards() {
     cardList.innerHTML = ``
     data.forEach(pokemon => {
         const li = document.createElement('li')
+        const statsList = pokemon.stats.map(stat => `<li>${stat.stat.name}: ${stat.base_stat}</li>`).join('')
+        const gameList = pokemon.game_indices.map(game => `<li>Game Version: ${game.version.name}</li>`).join('')
         li.innerHTML = `
             <div class="card">
                 <h2 class="card--title">${pokemon.name}</h2>
@@ -21,13 +23,10 @@ function renderCards() {
                     src="${pokemon.sprites.other["official-artwork"].front_default}"
                 />
                 <ul class="card--text">
-                    <li>HP: ${pokemon.stats[0].base_stat}</li>
-                    <li>ATTACK: ${pokemon.stats[1].base_stat}</li>
-                    <li>DEFENSE: ${pokemon.stats[2].base_stat}</li>
-                    <li>SPECIAL-ATTACK: ${pokemon.stats[3].base_stat}</li>
-                    <li>SPECIAL-DEFENSE: ${pokemon.stats[4].base_stat}</li>
-                    <li>SPEED: ${pokemon.stats[5].base_stat}</li>
+                    ${statsList}
                 </ul>
+                <h5>Pokemon appears in:</h5>
+                <u1 class="games-appeared-in">${gameList}</u1>
             </div>
         `
         cardList.append(li)
